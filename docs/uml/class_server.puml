@@ -1,0 +1,55 @@
+@startuml class_server
+title Class Diagram — Server
+
+class Server <<QTcpServer>> {
+  + start(port: quint16): bool
+  # incomingConnection(handle: qintptr)
+}
+
+class ClientHandler <<QObject>> {
+  - sock_: QTcpSocket*
+  - login_: QString
+  - role_: QString
+  - authed_: bool
+  - buffer_: QByteArray
+  + ClientHandler(socket)
+  - handleLine(line: QByteArray)
+  - dispatch(req): QJsonObject
+  - cmdRegister(): QJsonObject
+  - cmdLogin(): QJsonObject
+  - cmdVigenere(): QJsonObject
+  - cmdSha384(): QJsonObject
+  - cmdChord(): QJsonObject
+  - cmdStegCap(): QJsonObject
+  - cmdListUsers(): QJsonObject
+  - cmdSetBlock(): QJsonObject
+  - cmdLogList(): QJsonObject
+}
+
+class Database <<singleton>> {
+  - db_: QSqlDatabase
+  - mtx_: QMutex
+  + {static} instance(): Database&
+  + open(path): bool
+  + registerUser(login, hash, role): bool
+  + authenticate(login, hash): bool
+  + setBlocked(login, b): bool
+  + listUsers(): vector<UserRow>
+  + log(login, action, details)
+  + listLogs(): vector<LogRow>
+  - ensureSchema()
+  - seedAdmin()
+}
+
+class Vigenere <<core>>      { + encrypt(); + decrypt() }
+class Sha384   <<core>>      { + update(); + hex(); + hash() }
+class Chord    <<core>>      { + chord(f,a,b,eps): ChordResult; + evalExpr(expr,x) }
+class Stego    <<core>>      { + embed(); + extract(); + capacity() }
+
+Server "1" o--> "*" ClientHandler : creates
+ClientHandler --> Database : <<uses>>
+ClientHandler --> Vigenere : <<uses>>
+ClientHandler --> Sha384   : <<uses>>
+ClientHandler --> Chord    : <<uses>>
+ClientHandler --> Stego    : <<uses>>
+@enduml

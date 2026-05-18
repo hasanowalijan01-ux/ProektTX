@@ -1,0 +1,23 @@
+@startuml architecture
+title Deployment / Component Diagram
+
+node "Client host" {
+  [pd_client (Qt Widgets)] as CL
+  [ClientCore (Singleton)] as CC
+  CL --> CC
+}
+
+node "Server host / Docker" {
+  [pd_server] as SR
+  [QTcpServer] as TS
+  [ClientHandler] as CH
+  [Database (Singleton)] as DB
+  database "SQLite\n(pd_server.db)" as SQL
+  SR --> TS
+  TS --> CH
+  CH --> DB
+  DB --> SQL
+}
+
+CC -down-> TS : "TCP/JSON\nport 5555"
+@enduml

@@ -1,0 +1,37 @@
+@startuml class_client
+title Class Diagram — Client
+
+class ClientCore <<singleton, QObject>> {
+  - sock_: QTcpSocket
+  - login_: QString
+  - role_: QString
+  - nextId_: int
+  + {static} instance(): ClientCore&
+  + connectTo(host, port): bool
+  + isConnected(): bool
+  + request(cmd: QJsonObject): QJsonObject
+  + login(user, pwd): bool
+  + registerUser(user, pwd): bool
+  + logout()
+  + isAdmin(): bool
+}
+
+class LoginDialog <<QDialog>> {
+  + doLogin()
+  + doRegister()
+}
+
+class MainWindow <<QMainWindow>> {
+  - tabs_: QTabWidget*
+  - userTable_: QTableWidget*
+  - logTable_: QTableWidget*
+  + onVigenereEnc()/Dec()
+  + onSha384()
+  + onChordSolve()
+  + onStegEmbed()/Extract()
+  + refreshUsers(); toggleBlock(); refreshLogs()
+}
+
+LoginDialog  ..> ClientCore : uses
+MainWindow   ..> ClientCore : uses
+@enduml

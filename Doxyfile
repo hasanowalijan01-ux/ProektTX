@@ -1,0 +1,21 @@
+PROJECT_NAME           = "PD Crypto Suite"
+PROJECT_BRIEF          = "Vigenere + SHA-384 + Chord method + Steganography. Client/Server."
+PROJECT_NUMBER         = 1.0
+OUTPUT_DIRECTORY       = docs/doxygen
+INPUT                  = core/include core/src \
+                         server/include server/src server/main.cpp \
+                         client/include client/src client/main.cpp \
+                         tests
+RECURSIVE              = YES
+FILE_PATTERNS          = *.h *.hpp *.cpp
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+HAVE_DOT               = NO
+QUIET                  = YES
+WARN_IF_UNDOCUMENTED   = NO
+JAVADOC_AUTOBRIEF      = YES
+OUTPUT_LANGUAGE        = Russian
+USE_MDFILE_AS_MAINPAGE = README.md

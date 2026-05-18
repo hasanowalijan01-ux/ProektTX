@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  pd_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: server
+    image: pd_server:latest
+    container_name: pd_server
+    ports:
+      - "5555:5555"
+    volumes:
+      - pd_data:/data
+    restart: unless-stopped
+
+volumes:
+  pd_data:
