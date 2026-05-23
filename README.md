@@ -60,6 +60,9 @@ pd/
 ## Class Client Диаграмма
 ![class_client](docs/uml/class_client.png)
 
+## Class Server Диаграмма
+![class_server](docs/uml/class_server.png)
+
 ## Сборка
 
 ### Локально (требуется Qt6, CMake ≥ 3.16)
