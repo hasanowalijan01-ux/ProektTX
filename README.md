@@ -5,7 +5,7 @@
 уравнения, LSB-стеганография — внедрение сообщения в картинку), с авторизацией,
 ролями (user/admin), БД (SQLite, синглтон), несколькими клиентами и Docker-инфраструктурой.
 
-![architecture](docs/uml/architecture.puml)
+![architecture](docs/uml/architecture.png)
 
 ## Возможности
 
