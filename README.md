@@ -52,6 +52,12 @@ pd/
 
 Создание веток: `bash scripts/setup_branches.sh`
 
+## UseCase Диаграмма
+![usecase](docs/uml/use_case.png)
+
+## Class Client Диаграмма
+![class_client](docs/uml/class_client.png)
+
 ## Сборка
 
 ### Локально (требуется Qt6, CMake ≥ 3.16)
