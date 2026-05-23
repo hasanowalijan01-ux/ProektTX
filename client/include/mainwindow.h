@@ -24,6 +24,7 @@ private slots:
     void onVigenereEnc();
     void onVigenereDec();
     void onSha384();
+    void onMd5();
     void onChordSolve();
     void onStegEmbed();
     void onStegExtract();
@@ -39,8 +40,9 @@ private:
     // Vigenere
     QPlainTextEdit *vIn_, *vOut_;
     QLineEdit      *vKey_;
-    // SHA
+    // SHA-384 / MD5
     QPlainTextEdit *sIn_, *sOut_;
+    QPlainTextEdit *mIn_, *mOut_;
     // Chord
     QLineEdit      *cExpr_;
     QDoubleSpinBox *cA_, *cB_, *cEps_;
@@ -55,6 +57,7 @@ private:
 
     void buildVigenereTab();
     void buildShaTab();
+    void buildMd5Tab();
     void buildChordTab();
     void buildStegTab();
     void buildAdminTab();

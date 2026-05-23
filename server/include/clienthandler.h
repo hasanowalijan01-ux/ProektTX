@@ -37,6 +37,7 @@ private:
     QJsonObject cmdLogin   (const QJsonObject&);
     QJsonObject cmdVigenere(const QJsonObject&);
     QJsonObject cmdSha384  (const QJsonObject&);
+    QJsonObject cmdMd5     (const QJsonObject&);
     QJsonObject cmdChord   (const QJsonObject&);
     QJsonObject cmdStegCap (const QJsonObject&);
     QJsonObject cmdListUsers();

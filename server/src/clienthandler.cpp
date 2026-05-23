@@ -3,6 +3,7 @@
 #include "database.h"
 #include "vigenere.h"
 #include "sha384.h"
+#include "md5.h"
 #include "chord.h"
 #include "steganography.h"
 
@@ -56,6 +57,7 @@ QJsonObject ClientHandler::dispatch(const QJsonObject& r) {
     if (cmd == "LOGIN")       return cmdLogin(r);
     if (cmd == "VIGENERE")    return cmdVigenere(r);
     if (cmd == "SHA384")      return cmdSha384(r);
+    if (cmd == "MD5")         return cmdMd5(r);
     if (cmd == "CHORD")       return cmdChord(r);
     if (cmd == "STEG_CAP")    return cmdStegCap(r);
     if (cmd == "LIST_USERS")  return cmdListUsers();
@@ -124,6 +126,13 @@ QJsonObject ClientHandler::cmdSha384(const QJsonObject& r) {
     const auto t = r.value("text").toString();
     Database::instance().log(login_, "sha384");
     auto o = ok(); o["hash"] = QString::fromStdString(crypto::Sha384::hash(t.toStdString())); return o;
+}
+
+QJsonObject ClientHandler::cmdMd5(const QJsonObject& r) {
+    QJsonObject e; if (!requireAuth(e)) return e;
+    const auto t = r.value("text").toString();
+    Database::instance().log(login_, "md5");
+    auto o = ok(); o["hash"] = QString::fromStdString(crypto::Md5::hash(t.toStdString())); return o;
 }
 
 QJsonObject ClientHandler::cmdChord(const QJsonObject& r) {

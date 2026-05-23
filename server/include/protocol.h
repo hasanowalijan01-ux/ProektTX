@@ -11,6 +11,7 @@
  *  - LOGIN     { login, password }                     -> { ok, role, token, error? }
  *  - VIGENERE  { mode: "enc"|"dec", text, key }        -> { ok, result }
  *  - SHA384    { text }                                -> { ok, hash }
+ *  - MD5       { text }                                -> { ok, hash }
  *  - CHORD     { expr, a, b, eps }                     -> { ok, root, iter }
  *  - STEG_CAP  { size }                                -> { ok, capacity }
  *  - LIST_USERS (admin)                                -> { ok, users:[{login,role,blocked}] }

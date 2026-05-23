@@ -1,6 +1,7 @@
 add_library(pd_core STATIC
     src/vigenere.cpp
     src/sha384.cpp
+    src/md5.cpp
     src/chord.cpp
     src/steganography.cpp
 )

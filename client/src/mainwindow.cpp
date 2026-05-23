@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 
     buildVigenereTab();
     buildShaTab();
+    buildMd5Tab();
     buildChordTab();
     buildStegTab();
     buildAdminTab();
@@ -105,6 +106,24 @@ void MainWindow::onSha384() {
     auto r = ClientCore::instance().request({{"cmd","SHA384"},{"text",sIn_->toPlainText()}});
     if (r.value("ok").toBool()) sOut_->setPlainText(r.value("hash").toString());
     else QMessageBox::warning(this, "SHA-384", r.value("error").toString());
+}
+
+void MainWindow::buildMd5Tab() {
+    auto w = new QWidget;
+    mIn_  = new QPlainTextEdit;
+    mOut_ = new QPlainTextEdit; mOut_->setReadOnly(true);
+    auto btn = new QPushButton(tr("Вычислить MD5"));
+    connect(btn, &QPushButton::clicked, this, &MainWindow::onMd5);
+    auto lay = new QVBoxLayout(w);
+    lay->addWidget(new QLabel(tr("Текст:"))); lay->addWidget(mIn_);
+    lay->addWidget(btn);
+    lay->addWidget(new QLabel(tr("Хеш (hex, 32 симв.):"))); lay->addWidget(mOut_);
+    tabs_->addTab(w, tr("MD5"));
+}
+void MainWindow::onMd5() {
+    auto r = ClientCore::instance().request({{"cmd","MD5"},{"text",mIn_->toPlainText()}});
+    if (r.value("ok").toBool()) mOut_->setPlainText(r.value("hash").toString());
+    else QMessageBox::warning(this, tr("MD5"), r.value("error").toString());
 }
 
 // ---------- Chord ----------

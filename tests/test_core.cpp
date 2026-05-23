@@ -6,6 +6,7 @@
 #include <vector>
 #include "vigenere.h"
 #include "sha384.h"
+#include "md5.h"
 #include "chord.h"
 #include "steganography.h"
 
@@ -48,6 +49,23 @@ private slots:
     }
     void sha384DifferentInputsDiffer() {
         QVERIFY(pd::crypto::Sha384::hash("a") != pd::crypto::Sha384::hash("b"));
+    }
+
+    // ---- MD5 ----
+    void md5EmptyVector() {
+        QCOMPARE(QString::fromStdString(pd::crypto::Md5::hash("")),
+                 QStringLiteral("d41d8cd98f00b204e9800998ecf8427e"));
+    }
+    void md5AbcVector() {
+        QCOMPARE(QString::fromStdString(pd::crypto::Md5::hash("abc")),
+                 QStringLiteral("900150983cd24fb0d6963f7d28e17f72"));
+    }
+    void md5AlphabetVector() {
+        QCOMPARE(QString::fromStdString(pd::crypto::Md5::hash("abcdefghijklmnopqrstuvwxyz")),
+                 QStringLiteral("c3fcd3d76192e4007dfb496cca67e13b"));
+    }
+    void md5DifferentInputsDiffer() {
+        QVERIFY(pd::crypto::Md5::hash("a") != pd::crypto::Md5::hash("b"));
     }
 
     // ---- Chord method ----
